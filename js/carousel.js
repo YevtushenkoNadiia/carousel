@@ -112,7 +112,7 @@ class Carousel {
     this.gotoSlide(this.currentSlide - 1);
   }
 
-   _pause() {
+   pause() {
     if (this.isPlaying) {
       this.pauseIcon.style.opacity = 0;
       this.playIcon.style.opacity = 1;
@@ -121,7 +121,7 @@ class Carousel {
     }
   }
 
-  _play() {
+  play() {
     if (!this.isPlaying) {
       this.pauseIcon.style.opacity = 1;
       this.playIcon.style.opacity = 0;
@@ -134,7 +134,7 @@ class Carousel {
     let target = e.target;
 
     if (target && target.matches('li.indicator')) {
-      this._pause();
+      this.pause();
       this.gotoSlide(+target.dataset.slideTo);
     }
   }
@@ -146,16 +146,16 @@ class Carousel {
   }
 
   pausePlay() {
-    this.isPlaying ? this._pause() : this._play();
+    this.isPlaying ? this.pause() : this.play();
   }
 
   next() {
-    this._pause();
+    this.pause();
     this.nextSlide();
   }
 
   prev() {
-    this._pause();
+    this.pause();
     this.prevSlide();
   }
 
