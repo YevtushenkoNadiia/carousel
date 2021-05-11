@@ -1,6 +1,5 @@
 // классы
 
-
 class Carousel {
   constructor(p) {
     let settings = (() => ({...{containerID: '#carousel', interval: 5000, isPlaying: true,slideID: '.slide'}, ...p}))();
@@ -43,6 +42,7 @@ class Carousel {
     this.currentSlide = 0;
   }
 
+
   _initControls() {
     let controls = document.createElement('div');
     const PAUSE = `<span id="pause-btn" class="control-pause">
@@ -66,6 +66,7 @@ class Carousel {
 
     this.isPlaying ? this.pauseIcon.style.opacity = 1 : this.playIcon.style.opacity = 1;
   }
+
 
   _initIndicators() {
     let indicators = document.createElement('ol');
@@ -94,6 +95,7 @@ class Carousel {
     this.indicatorsContainer.addEventListener('click', this._indicate.bind(this));
   }
 
+
   gotoSlide(n) {
     this.slideItems[this.currentSlide].classList.toggle('active');
     this.indicatorItems[this.currentSlide].classList.toggle('active');
@@ -107,10 +109,10 @@ class Carousel {
   }
 
   prevSlide() {
-    this.prevSlide(this.currentSlide - 1);
+    this.gotoSlide(this.currentSlide - 1);
   }
 
-  _pause() {
+   _pause() {
     if (this.isPlaying) {
       this.pauseIcon.style.opacity = 0;
       this.playIcon.style.opacity = 1;
@@ -145,6 +147,16 @@ class Carousel {
 
   pausePlay() {
     this.isPlaying ? this._pause() : this._play();
+  }
+
+  next() {
+    this._pause();
+    this.nextSlide();
+  }
+
+  prev() {
+    this._pause();
+    this.prevSlide();
   }
 
   init() {
